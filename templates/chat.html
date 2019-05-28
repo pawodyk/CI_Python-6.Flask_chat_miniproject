@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Chat page for {{ usr }}</title>
+    <title>Chat page for {{ user }}</title>
     
     <style type="text/css">
         .chatbox {
-            padding: 10px 20px;
-            border: solid 2px grey;
+            padding: 10px;
             overflow: auto;
-            border-radius: 10px;
+            max-height: 50vh;
         }
         
         .chatbox p {
@@ -25,12 +24,12 @@
 </head>
 
 <body>
-    <h1>Welcome, {{ usr }}</h1>
+    <h1>Welcome, {{ user }}</h1>
     <hr>
     
     <div class="chatbox">
-        {% for msg in msgs %}
-            <p>({{ msg.timestamp }}) {{ msg.username }}: {{ msg.message }}</p>
+        {% for post in messages %}
+            <p>({{ post.timestamp }}) {{ post.username }}: {{ post.message }}</p>
         {% endfor %}
     </div>
     
@@ -39,7 +38,6 @@
         <br>
         <button>Send Message</button>
     </form>
-    
     
     
     <script>

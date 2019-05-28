@@ -27,7 +27,7 @@ def index():
         session["username"] = request.form["username"]
         
     if "username" in session:
-        print("User " +  session["username"] + "entered chat")
+        print("User " +  session["username"] + " entered chat")
         return redirect("/" + session["username"])
         
     return render_template("index.html")
@@ -36,7 +36,7 @@ def index():
 @app.route("/<username>")
 def user(username):
     """ Display chat messages """
-    return render_template("chat.html", usr=username, msgs=messages)
+    return render_template("chat.html", user=username, messages=messages)
 
 
 @app.route("/<username>/<message>")
