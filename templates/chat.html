@@ -36,14 +36,33 @@
     <form method="POST">
         <textarea cols="50" rows="4" name="message" id="message"></textarea>
         <br>
-        <button>Send Message</button>
+        <button id="send_message">Send Message</button>
     </form>
     
     
     <script>
-        var timer = setTimeout(function() {
-            location.reload()
-        }, 10000)
+        let txtbx = document.getElementById("message");
+        let btn_send = document.getElementById("send_message");
+        
+        function refreshPage() {
+            location.reload();
+        }
+        
+        var timer = setTimeout(refreshPage, 10000); // default refresh rate
+        
+        txtbx.onkeydown = function(e) {
+            clearTimeout(timer);
+            
+            timer = setTimeout(refreshPage, 20000); //fallback refresh rate 20s
+        }
+        
+        btn_send.onclick = function() {
+            refreshPage();
+        }
+        
+        
+        
+        
     </script>
 
 </body>
