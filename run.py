@@ -7,14 +7,18 @@ app.secret_key = "temporaryrandomstring123"
 messages = []
 
 def add_messages(username, message):
-    """ adds the user and the message to the list """
+    """ adds the user and the message to the dictonary """
     timestamp = datetime.now().strftime('%H:%M:%S')
-    messages.append("({}) {}: {}".format(timestamp, username, message))
+    messages_dict = {"timestamp": timestamp, "username": username, "message": message}
     
+    messages.append(messages_dict)
+    
+    
+# function no longer needed
+# def get_all_messages():
+#     """ return all messages, formated on seperate lines"""
+#     return "<br>".join(messages)
 
-def get_all_messages():
-    """ return all messages, formated on seperate lines"""
-    return "<br>".join(messages)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -26,14 +30,13 @@ def index():
         print("User " +  session["username"] + "entered chat")
         return redirect("/" + session["username"])
         
-        
     return render_template("index.html")
 
 
 @app.route("/<username>")
 def user(username):
     """ Display chat messages """
-    return "<h1>Welcome, {0}</h1><hr> {1}".format(username, get_all_messages())
+    return render_template("chat.html", usr=username, msgs=messages)
 
 
 @app.route("/<username>/<message>")
@@ -44,3 +47,5 @@ def send_message(username, message):
     
 
 app.run(host=os.getenv('IP', '127.0.0.1'), port=os.getenv('PORT', 5500), debug=True)
+
+#END OF APPLICATION
