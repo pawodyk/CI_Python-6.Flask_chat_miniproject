@@ -32,8 +32,6 @@ def user(username):
     """ Allowes user to add and display chat messages """
     
     if request.method == "POST":
-        print(session)
-        print(request.form)
         
         if "username" in session:
             username = session["username"]
