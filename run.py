@@ -32,6 +32,8 @@ def user(username):
     """ Allowes user to add and display chat messages """
     
     if request.method == "POST":
+		print(session)
+		print(request.form)
         
         if "username" in session:
             username = session["username"]
@@ -44,6 +46,6 @@ def user(username):
     return render_template("chat.html", user=username, messages=chat)
 
 
-app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', "5000")), debug=False)
+app.run(host=os.getenv('IP', '127.0.0.1'), port=int(os.getenv('PORT', "5500")), debug=True)
 
 #END OF APPLICATION
